@@ -55,6 +55,7 @@ class Application(Base):
     appointment_time: Mapped[Time] = mapped_column(Time, nullable=False)  # Время заявки
     car_type: Mapped[CarTypeEnum] = mapped_column(Enum(CarTypeEnum), nullable=False)
     client_name: Mapped[str] = mapped_column(String, nullable=False)  # Имя пользователя
+    phone_number: Mapped[str] = mapped_column(String, nullable=True)  # Номер телефона
     # Связи с пользователем, мастером и услугой
     user: Mapped["User"] = relationship(back_populates="applications")
     master: Mapped["Master"] = relationship(back_populates="applications")

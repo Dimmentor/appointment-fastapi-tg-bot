@@ -84,7 +84,8 @@ class ApplicationDAO(BaseDAO):
                         "appointment_date": app.appointment_date,
                         "appointment_time": app.appointment_time,
                         "client_name": app.client_name,  # Имя клиента
-                        "car_type": app.car_type.value  # Тип автомобиля
+                        "car_type": app.car_type.value,  # Тип автомобиля
+                        "phone_number": app.phone_number  # Номер телефона
                     }
                     for app in applications
                 ]

@@ -21,6 +21,7 @@ async def create_appointment(request: Request):
     master_id, master_name = validated_data.stylist.split('_')
     service_id, service_name = validated_data.service.split('_')
     car_type, car_type_name = validated_data.car_type.split('_')
+    phone_number, phone_number_name = validated_data.phone_number.split('_')
 
     # Формируем сообщение для пользователя
     message = (
@@ -31,7 +32,8 @@ async def create_appointment(request: Request):
         f"✔ <b>Услуга:</b> {service_name}\n"
         f"🐒️ <b>Мастер:</b> {master_name}\n"
         f"📅 <b>Дата записи:</b> {validated_data.appointment_date}\n"
-        f"⏰ <b>Время записи:</b> {validated_data.appointment_time}\n\n"
+        f"⏰ <b>Время записи:</b> {validated_data.appointment_time}\n"
+        f"📞 <b>Контактный номер:</b> {phone_number_name}\n\n"
         
         "Спасибо за выбор нашей автомойки! ✨ Мы ждём вас в назначенное время."
     )
@@ -46,6 +48,7 @@ async def create_appointment(request: Request):
         f"📅 Дата: {validated_data.appointment_date}\n"
         f"⏰ Время: {validated_data.appointment_time}\n"
         f"🚗 Тип автомобиля: {car_type_name}"
+        f"📞 Контактный номер: {phone_number_name}"
     )
 
     # Добавление заявки в базу данных
@@ -57,6 +60,7 @@ async def create_appointment(request: Request):
         appointment_time=validated_data.appointment_time,
         client_name=validated_data.name,
         car_type=car_type,
+        phone_number = phone_number,
     )
     kb = main_keyboard(user_id=validated_data.user_id, first_name=validated_data.name)
     # Отправка сообщений через бота

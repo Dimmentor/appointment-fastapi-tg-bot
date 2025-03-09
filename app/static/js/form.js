@@ -20,6 +20,7 @@ document.getElementById('closePopup').addEventListener('click', async function (
     const userId = document.getElementById('user_id').value;
     const stylist = document.getElementById('stylist').value.trim();
     const car_type = document.getElementById('car_type').value.trim();
+    const phone_number = document.getElementById('phone_number').value.trim();
 
     // Проверяем валидность полей
     if (name.length < 2 || name.length > 50) {
@@ -42,6 +43,34 @@ document.getElementById('closePopup').addEventListener('click', async function (
         return;
     }
 
+    // Валидация номера телефона
+    const phoneRegex = /^\+?\d+$/; //
+    if (!phoneRegex.test(phone_number)) {
+        alert("Номер телефона должен содержать только цифры и символ '+'.");
+        return;
+    }
+
+    // Проверка на не раньше текущей даты
+    const today = new Date();
+    const selectedDate = new Date(date);
+    if (selectedDate < today.setHours(0, 0, 0, 0)) {
+        alert("Дата назначения не может быть раньше сегодняшнего дня.");
+        return;
+    }
+
+    // Валидация времени
+    const timeParts = time.split(':');
+    const selectedHours = parseInt(timeParts[0], 10);
+    const selectedMinutes = parseInt(timeParts[1], 10);
+
+    if (selectedHours < 7 || selectedHours > 22 || (selectedHours === 22 && selectedMinutes > 0)) {
+        alert("Время должно быть в интервале с 07:00 до 22:00.");
+        return;
+    }
+
+
+
+
     // Создаем объект с данными
     const appointmentData = {
         name: name,
@@ -50,7 +79,8 @@ document.getElementById('closePopup').addEventListener('click', async function (
         appointment_date: date,
         appointment_time: time,
         stylist: stylist,
-        user_id: userId
+        user_id: userId,
+        phone_number: phone_number
     };
 
     // Преобразуем объект в JSON строку
