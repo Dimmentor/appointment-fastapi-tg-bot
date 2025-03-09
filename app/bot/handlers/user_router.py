@@ -47,3 +47,7 @@ async def about_us(message: Message):
 async def contact_us(message: Message):
     chat_url = "https://t.me/l0ngdl" #чат с админом
     await message.answer(f"Вы можете связаться с нами по следующей ссылке: {chat_url}")
+
+@user_router.message(lambda message: F.text not in ["💵️ Цены", "ℹ️ О нас", "📩 Чат с сотрудником", "🔙 Назад"])
+async def echo(message: Message):
+    await message.answer(f"Выберите категорию меню")
