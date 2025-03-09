@@ -42,3 +42,8 @@ async def price_list(message: Message):
 async def about_us(message: Message):
     kb = app_keyboard(user_id=message.from_user.id, first_name=message.from_user.first_name)
     await message.answer(get_about_us_text(), reply_markup=kb)
+
+@user_router.message(F.text == "📩 Чат с сотрудником")
+async def contact_us(message: Message):
+    chat_url = "https://t.me/l0ngdl" #чат с админом
+    await message.answer(f"Вы можете связаться с нами по следующей ссылке: {chat_url}")

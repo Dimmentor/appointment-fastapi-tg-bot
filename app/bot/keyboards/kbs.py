@@ -1,4 +1,4 @@
-from aiogram.types import ReplyKeyboardMarkup, WebAppInfo, InlineKeyboardMarkup
+from aiogram.types import ReplyKeyboardMarkup, WebAppInfo, InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
 
 from app.config import settings
@@ -12,6 +12,7 @@ def main_keyboard(user_id: int, first_name: str) -> ReplyKeyboardMarkup:
     kb.button(text="📝 Записаться на мойку", web_app=WebAppInfo(url=url_add_application))
     kb.button(text="💵️ Цены")
     kb.button(text="ℹ️ О нас")
+    kb.button(text="📩 Чат с сотрудником")
     if user_id == settings.ADMIN_ID:
         kb.button(text="🔑 Админ панель")
     kb.adjust(1)
