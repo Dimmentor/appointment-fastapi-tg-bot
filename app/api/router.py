@@ -21,7 +21,7 @@ async def create_appointment(request: Request):
     master_id, master_name = validated_data.stylist.split('_')
     service_id, service_name = validated_data.service.split('_')
     car_type, car_type_name = validated_data.car_type.split('_')
-    phone_number, phone_number_name = validated_data.phone_number.split('_')
+    phone_number = validated_data.phone_number
 
     # Формируем сообщение для пользователя
     message = (
@@ -33,7 +33,7 @@ async def create_appointment(request: Request):
         f"🐒️ <b>Мастер:</b> {master_name}\n"
         f"📅 <b>Дата записи:</b> {validated_data.appointment_date}\n"
         f"⏰ <b>Время записи:</b> {validated_data.appointment_time}\n"
-        f"📞 <b>Контактный номер:</b> {phone_number_name}\n\n"
+        f"📞 <b>Контактный номер:</b> {phone_number}\n\n"
         
         "Спасибо за выбор нашей автомойки! ✨ Мы ждём вас в назначенное время."
     )
@@ -48,7 +48,7 @@ async def create_appointment(request: Request):
         f"📅 Дата: {validated_data.appointment_date}\n"
         f"⏰ Время: {validated_data.appointment_time}\n"
         f"🚗 Тип автомобиля: {car_type_name}"
-        f"📞 Контактный номер: {phone_number_name}"
+        f"📞 Контактный номер: {phone_number}"
     )
 
     # Добавление заявки в базу данных

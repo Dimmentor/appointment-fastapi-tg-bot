@@ -50,13 +50,22 @@ document.getElementById('closePopup').addEventListener('click', async function (
         return;
     }
 
-    // Проверка на не раньше текущей даты
-    const today = new Date();
-    const selectedDate = new Date(date);
-    if (selectedDate < today.setHours(0, 0, 0, 0)) {
-        alert("Дата назначения не может быть раньше сегодняшнего дня.");
-        return;
-    }
+const today = new Date();
+const selectedDate = new Date(date);
+today.setHours(0, 0, 0, 0);
+if (selectedDate < today) {
+    alert("Дата назначения не может быть раньше сегодняшнего дня.");
+    return;
+}
+
+const oneMonthFromNow = new Date();
+oneMonthFromNow.setMonth(today.getMonth() + 1);
+oneMonthFromNow.setHours(0, 0, 0, 0);
+
+if (selectedDate > oneMonthFromNow) {
+    alert("Дата назначения не может быть позже чем через месяц.");
+    return;
+}
 
     // Валидация времени
     const timeParts = time.split(':');
@@ -104,6 +113,8 @@ document.getElementById('closePopup').addEventListener('click', async function (
         }, 100);
     } catch (error) {
         console.error('Error sending POST request:', error);
+    } finally {
+        this.disabled = false;
     }
 });
 
