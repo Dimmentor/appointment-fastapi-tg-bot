@@ -10,6 +10,7 @@ def main_keyboard(user_id: int, first_name: str) -> ReplyKeyboardMarkup:
     url_add_application = f'{settings.BASE_SITE}/form?user_id={user_id}&first_name={first_name}'
     kb.button(text="🌐 Мои заявки", web_app=WebAppInfo(url=url_applications))
     kb.button(text="📝 Записаться на мойку", web_app=WebAppInfo(url=url_add_application))
+    kb.button(text="💵️ Цены")
     kb.button(text="ℹ️ О нас")
     if user_id == settings.ADMIN_ID:
         kb.button(text="🔑 Админ панель")
